@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<triggers>
+  <trigger>
+    <id>1423062475928</id>
+    <date>Wed Nov 11 11:11:00 SAMT 2015</date>
+    <idTask>1234567777</idTask>
+  </trigger>
+  <trigger>
+    <id>1423404070988</id>
+    <date>Thu Nov 12 11:11:00 SAMT 2015</date>
+    <idTask>1423404070920</idTask>
+  </trigger>
+</triggers>

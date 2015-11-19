@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE clients>
+<clients>
+  <client>
+    <login>admin</login>
+    <pass>123456</pass>
+  </client>
+  <client>
+    <login>qwerty</login>
+    <pass>1</pass>
+  </client>
+  <client>
+    <login>йцукен</login>
+    <pass>23</pass>
+  </client>
+  <client>
+    <login>qwertyy</login>
+    <pass>1</pass>
+  </client>
+  <client>
+    <login>sergey</login>
+    <pass>123456789</pass>
+  </client>
+  <client>
+    <login>kigo</login>
+    <pass>iddqd</pass>
+  </client>
+  <client>
+    <login>7</login>
+    <pass>4</pass>
+  </client>
+</clients>
