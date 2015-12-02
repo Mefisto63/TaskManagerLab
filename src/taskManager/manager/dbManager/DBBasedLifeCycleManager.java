@@ -191,7 +191,7 @@ public class DBBasedLifeCycleManager implements LifeCycleManager {
     public ArrayList<Trigger> getAllTriggers() throws IOException {
         Connection connection = poolConnection.get();
         ArrayList<Trigger> triggers = new ArrayList<>();
-        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM triggers")) {
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM triggers where is_check = false")) {
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
@@ -215,7 +215,7 @@ public class DBBasedLifeCycleManager implements LifeCycleManager {
     public ArrayList<Trigger> getTrigger(long id) throws IOException {
         Connection connection = poolConnection.get();
         ArrayList<Trigger> triggers = new ArrayList<>();
-        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM triggers WHERE triggers.id = ?")) {
+        try (PreparedStatement stm = connection.prepareStatement("SELECT * FROM triggers WHERE triggers.id = ? and is_check = false")) {
             stm.setLong(1, id);
             ResultSet resultSet = stm.executeQuery();
             while (resultSet.next()) {
@@ -258,7 +258,7 @@ public class DBBasedLifeCycleManager implements LifeCycleManager {
     @Override
     public void deleteTrigger(long id) throws IOException {
         Connection connection = poolConnection.get();
-        try (PreparedStatement stm = connection.prepareStatement("DELETE FROM triggers WHERE triggers.id = ?")) {
+        try (PreparedStatement stm = connection.prepareStatement(/*"DELETE FROM triggers WHERE triggers.id = ?"*/ "UPDATE triggers SET  is_check = true WHERE id = ?")) {
             stm.setLong(1, id);
             stm.execute();
         } catch (SQLException e) {
@@ -275,7 +275,7 @@ public class DBBasedLifeCycleManager implements LifeCycleManager {
     @Override
     public Date getNearestTime() throws IOException {
         Connection connection = poolConnection.get();
-        try (PreparedStatement stm = connection.prepareStatement("SELECT MIN (triggers.date_trig) FROM triggers")) {
+        try (PreparedStatement stm = connection.prepareStatement("SELECT MIN (triggers.date_trig) FROM triggers where is_check = false")) {
             ResultSet resultSet = stm.executeQuery();
             resultSet.next();
             Timestamp timestamp = resultSet.getTimestamp(1);
